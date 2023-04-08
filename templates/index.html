@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        table {
+            border-spacing: 10px; /*设置边框的距离*/
+            border-collapse: collapse; /*合并边框(设置了此属性 边框的距离就没用了 所以用此属性无需再设置边框距离)*/
+            border: Transparent;
+        }
+
+        td, th {
+            border: Transparent;
+        }
+    </style>
+    <title>OpenAI Quickstart</title>
+    <link rel="shortcut icon"
+          href="{{ url_for('static', filename='question.jpeg') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <td width="500" height="500" margin="10" align="center">
+                <img src="{{ url_for('static', filename='chat.png') }}" class="icon" />
+                <h3>Chat</h3>
+                <form action="/" method="post">
+                    <input type="text" name="question" placeholder="Enter a question" required />
+                    <input type="submit" value="Get answer" />
+                </form>
+                <br />
+                <br />
+                {% if result %}
+                <div class="result">{{ result }}</div>
+                {% endif %}
+            </td>
+            <td width="500" height="500" margin="10" align="center">
+                <img src="{{ url_for('static', filename='input.png') }}" class="icon" />
+                <h3>Edits</h3>
+                <form action="/correct" method="post">
+                    <input type="text" name="textToCorrect" placeholder="Type a wrong sentence" required />
+                    <input type="submit" value="Correct the sentence" />
+                </form>
+                <br />
+                <br />
+                {% if result1 %}
+                <div class="result1">{{ result1 }}</div>
+                {% endif %}
+            </td>
+            <td width="500" height="500" margin="10" align="center">
+                <img src="{{ url_for('static', filename='beautiful girl.png') }}" class="icon" />
+                <h3>Image (Beta)</h3>
+                <form action="/image" method="post">
+                    <input type="text" name="imageContent" placeholder="Type the image you want" required />
+                    <input type="submit" value="Create image" />
+                </form>
+                <br />
+                <br />
+                {% if displayImageSrc1 %}
+                <img name="displayImage1" src="{{displayImageSrc1}}" width="128" height="128" />
+                {% endif %}
+                {% if displayImageSrc2 %}
+                <img name="displayImage2" src="{{displayImageSrc2}}" width="128" height="128" />
+                {% endif %}
+                {% if result2 %}
+                <div class="result2">{{ result2 }}</div>
+                {% endif %}
+
+            </td>
+        </tr>
+        <tr>
+            <td width="500" height="500" margin="10" align="center">
+                <img src="{{ url_for('static', filename='microphone.png') }}" class="icon" />
+                <h3>Audio (Beta)</h3>
+                <form action="/audio" method="post">
+                    <h5 type="text" name="audioToText" placeholder="Input audio path">\static\friend.mp3</h5>
+                    <audio controls>
+                        <source src="{{ url_for('static', filename='friend.mp3') }}" type="audio/mpeg">
+                    </audio>
+                    <br />
+                    <input type="submit" value="Start" />
+                </form>
+                <br />
+                <br />
+                {% if audioResult %}
+                <div class="audioResult">{{ audioResult }}</div>
+                {% endif %}
+            </td>
+            <td width="500" height="500" margin="10" align="center">
+            </td>
+            <td width="500" height="500" margin="10" align="center">
+                <img src="{{ url_for('static', filename='translate.png') }}" class="icon" />
+                <h3>Audio Translation(Beta)</h3>
+                <form action="/audioTranslation" method="post">
+                    <h5 type="text" name="audioTranslation">GUESS</h5>
+                    <audio controls>
+                        <source src="{{ url_for('static', filename='roof.mp3') }}" type="audio/mpeg">
+                    </audio>
+                    <br />
+                    <input type="submit" value="Start" />
+                </form>
+                <br />
+                <br />
+                {% if audioTranslationResult %}
+                <div class="audioTranslationResult">{{ audioTranslationResult }}</div>
+                {% endif %}
+            </td>
+            <td width="500" height="500" margin="10" align="center">
+            </td>
+        </tr>
+        <tr>
+            
+        </tr>
+    </table>
+</body>
